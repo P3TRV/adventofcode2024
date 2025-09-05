@@ -83,8 +83,14 @@ public class Main {
 	public static void main(String[] args) {
 		System.out.println("Current path "+Paths.get(".").toAbsolutePath());
 		try (var lines = Files.lines(Paths.get("input-day1.txt"))) {
-			 List<Locations> listLocationsSortedByLocationId1 = lines.flatMap(l -> convertLineToLocations(l).stream()).sorted(Comparator.comparingLong(l -> l.locationId1)).collect(Collectors.toList());
-			 List<Long> listLocationId2Sorted = listLocationsSortedByLocationId1.stream().sorted(Comparator.comparingLong(l -> l.locationId2)).map(loc -> loc.locationId2).collect(Collectors.toList());
+			 List<Locations> listLocationsSortedByLocationId1 = lines
+					 .flatMap(l -> convertLineToLocations(l).stream())
+					 .sorted(Comparator.comparingLong(l -> l.locationId1))
+					 .collect(Collectors.toList());
+			 List<Long> listLocationId2Sorted = listLocationsSortedByLocationId1.stream()
+					 .sorted(Comparator.comparingLong(l -> l.locationId2))
+					 .map(loc -> loc.locationId2)
+					 .collect(Collectors.toList());
 			 
 			 System.out.println("*** Part 1 ***");
 			 long totalDistance = 0;

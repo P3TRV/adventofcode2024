@@ -3,5 +3,5 @@
  * 
  * https://adventofcode.com/2024
  */
-module day1 {
+module adventofcode {
 }
