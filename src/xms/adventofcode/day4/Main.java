@@ -100,6 +100,17 @@ public class Main {
 		
 		System.out.println("*** Part 1 ***");
 		System.out.println("Total sum of XMAS horizontal is " + sumPart1);
+		
+		long sumPart2 = 0;
+		try {
+			List<char[]> array = Files.lines(Paths.get("input-day4.txt")).map(l -> l.toCharArray()).collect(Collectors.toList());
+			sumPart2 += countXMAS(array);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		System.out.println("*** Part 2 ***");
+		System.out.println("Total sum of XMAS horizontal is " + sumPart2);
 	}
 
 	private static long countHorizontalXMAS(List<char[]> array) {
@@ -190,6 +201,23 @@ public class Main {
 		return cnt;
 	}
 	
-	
+	private static long countXMAS(List<char[]> array) {
+		int cnt = 0;
+		for(int r=1; r<array.size()-1; r++) {			
+			char[] arrrowUp = array.get(r-1);
+			char[] arrrow = array.get(r);
+			char[] arrrowDown = array.get(r+1);
+			int length = arrrow.length;
+			for(int c=1; c<length-1; c++) {				
+				if ('A' ==arrrow[c]
+						&& (('M' == arrrowUp[c-1] && 'S' == arrrowDown[c+1]) || ('S' == arrrowUp[c-1] && 'M' == arrrowDown[c+1])) 
+						&& (('M' == arrrowDown[c-1] && 'S' == arrrowUp[c+1]) || ('S' == arrrowDown[c-1] && 'M' == arrrowUp[c+1])))
+				{
+					cnt++;
+				}
+			}
+		}
+		return cnt;
+	}	
 	
 }
